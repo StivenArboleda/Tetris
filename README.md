@@ -12,7 +12,6 @@ It has 6 different figures that appear in random order. The six figures are clas
    - I: It has 2 rotations. 0 and 90 degrees
    - O: It has a rotation. 0 degrees
 
-
-	1. Rotations are effective using the up arrow key. ⬆️
-	2. Move from side to side with the right arrow and left arrow keys. ⬅️➡️
-	3. Accelerate the figure's fall with the down arrow key. ⬇️
+##### 1. Rotations are effective using the up arrow key. ⬆️
+##### 2. Move from side to side with the right arrow and left arrow keys. ⬅️➡️
+##### 3. Accelerate the figure's fall with the down arrow key. ⬇️
