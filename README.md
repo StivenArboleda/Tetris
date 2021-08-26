@@ -15,3 +15,9 @@ It has 6 different figures that appear in random order. The six figures are clas
 ##### 1. Rotations are effective using the up arrow key. ⬆️
 ##### 2. Move from side to side with the right arrow and left arrow keys. ⬅️➡️
 ##### 3. Accelerate the figure's fall with the down arrow key. ⬇️
+
+
+# SKETCH
+
+![image](https://user-images.githubusercontent.com/47890814/130896825-cdf539d8-a362-45e7-beff-894289aaa89c.png)
+
