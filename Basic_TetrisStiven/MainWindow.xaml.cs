@@ -66,80 +66,131 @@ namespace Basic_TetrisStiven
                                         "L_Shape_0"
                                    };
 
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            gameSpeed = GAMESPEED;
+           
+            // Inicialización del contador
+            timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 0, 0, gameSpeed); // 600 millisegundos
+            timer.Tick += Timer_Tick; //TIEMPO DE CAÍDA
+            tetrisGridColumn = Tetris.ColumnDefinitions.Count;
+            tetrisGridRow = Tetris.RowDefinitions.Count;
+            shapeRandom = new Random();
+            currentShapeNumber = shapeRandom.Next(1, 8);
+            nextShapeNumber = shapeRandom.Next(1, 8);
+            Next.Visibility = Level.Visibility = GameOver.Visibility = Visibility.Collapsed;
+        }
+
+        //TIEMPO DE CAÍDA DE FIGURAS
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            downPos++;
+            //MOVER LAS FIGURAS
+            if (gameSpeedCounter >= levelScale)
+            {
+                if (gameSpeed >= 50)
+                {
+                    gameSpeed -= 50;
+                    gameLevel++;
+                    Level.Text = "Nivel: " + gameLevel.ToString();
+                }
+                else { gameSpeed = 50; }
+                timer.Stop();
+                timer.Interval = new TimeSpan(0, 0, 0, 0, gameSpeed);
+                timer.Start();
+                gameSpeedCounter = 0;
+            }
+            gameSpeedCounter += (gameSpeed / 1000f);
+
+        }
+
+
+
         //DEFINICION DE CADA FIGURA Y SUS DIFERENTES ROTACIONES
 
-        //---- L Shape------------
-        public int[,] L_Shape_0 = new int[2, 3] {{0,0,1},    //     * 
-                                                        {1,1,1}};   // * * *
+        //---- L Shape------------                                      // FORMA FÍSICA
 
-        public int[,] L_Shape_90 = new int[3, 2] {{1,0},     // *  
-                                                        {1,0},     // *
-                                                        {1,1}};    // * *
+        public int[,] L_Shape_0 = new int[2, 3] {{0,0,1},               //     * 
+                                                        {1,1,1}};       // * * *
 
-        public int[,] L_Shape_180 = new int[2, 3] {{1,1,1},  // * * * 
-                                                        {1,0,0}}; // *
+        public int[,] L_Shape_90 = new int[3, 2] {{1,0},                // *  
+                                                        {1,0},          // *
+                                                        {1,1}};         // * *
 
-        public int[,] L_Shape_270 = new int[3, 2] {{1,1},    // * * 
-                                                       {0,1},    //   *
-                                                       {0,1 }};  //   *
+        public int[,] L_Shape_180 = new int[2, 3] {{1,1,1},             // * * * 
+                                                        {1,0,0}};       // *
 
-        //---- J shape------------
-        public int[,] J_Shape_0 = new int[2, 3] {{1,0,0},    // * 
-                                                     {1,1,1}};   // * * *
+        public int[,] L_Shape_270 = new int[3, 2] {{1,1},               // * * 
+                                                       {0,1},           //   *
+                                                       {0,1 }};         //   *
 
-        public int[,] J_Shape_90 = new int[3, 2] {{1,1},     // * * 
-                                                      {1,0},     // *
-                                                      {1,0}};    // * 
+        //---- J shape------------                                      // FORMA FÍSICA
 
-        public int[,] J_Shape_180 = new int[2, 3] {{1,1,1},  // * * * 
-                                                       {0,0,1}}; //     *
+        public int[,] J_Shape_0 = new int[2, 3] {{1,0,0},               // * 
+                                                     {1,1,1}};          // * * *
 
-        public int[,] J_Shape_270 = new int[3, 2] {{0,1},    //   * 
-                                                       {0,1},    //   *
-                                                       {1,1 }};  // * *
+        public int[,] J_Shape_90 = new int[3, 2] {{1,1},                // * * 
+                                                      {1,0},            // *
+                                                      {1,0}};           // * 
 
-        //---- T shape------------
-        public int[,] T_Shape_0 = new int[2, 3] {{0,1,0},    //    * 
-                                                     {1,1,1}};   //  * * *
+        public int[,] J_Shape_180 = new int[2, 3] {{1,1,1},             // * * * 
+                                                       {0,0,1}};        //     *
 
-        public int[,] T_Shape_90 = new int[3, 2] {{1,0},     //  * 
-                                                      {1,1},     //  * *
-                                                      {1,0}};    //  *  
+        public int[,] J_Shape_270 = new int[3, 2] {{0,1},               //   * 
+                                                       {0,1},           //   *
+                                                       {1,1 }};         // * *
 
-        public int[,] T_Shape_180 = new int[2, 3] {{1,1,1},  // * * *
-                                                       {0,1,0}}; //   * 
+        //---- T shape------------                                      // FORMA FÍSICA
 
-        public int[,] T_Shape_270 = new int[3, 2] {{0,1},    //   * 
-                                                       {1,1},    // * *
-                                                       {0,1}};   //   *
+        public int[,] T_Shape_0 = new int[2, 3] {{0,1,0},               //    * 
+                                                     {1,1,1}};          //  * * *
 
-        //---- Z shape------------
-        public int[,] Z_Shape_0 = new int[2, 3] {{1,1,0},    // * *
-                                                     {0,1,1}};   //   * *
+        public int[,] T_Shape_90 = new int[3, 2] {{1,0},                //  * 
+                                                      {1,1},            //  * *
+                                                      {1,0}};           //  *  
 
-        public int[,] Z_Shape_90 = new int[3, 2] {{0,1},     //   *
-                                                      {1,1},     // * *
-                                                      {1,0}};    // *
+        public int[,] T_Shape_180 = new int[2, 3] {{1,1,1},             // * * *
+                                                       {0,1,0}};        //   * 
 
-        //---- S Shape------------
-        public int[,] S_Shape_0 = new int[2, 3] {{0,1,1},    //   * *
-                                                     {1,1,0}};   // * *
+        public int[,] T_Shape_270 = new int[3, 2] {{0,1},               //   * 
+                                                       {1,1},           // * *
+                                                       {0,1}};          //   *
 
-        public int[,] S_Shape_90 = new int[3, 2] {{1,0},     // *
-                                                      {1,1},     // * *
-                                                      {0,1}};    //   *
+        //---- Z shape------------                                      // FORMA FÍSICA
 
-        //---- I Shape------------
-        public int[,] I_Shape_0 = new int[2, 4] { { 1, 1, 1, 1 }, { 0, 0, 0, 0 } };// * * * *
+        public int[,] Z_Shape_0 = new int[2, 3] {{1,1,0},               // * *
+                                                     {0,1,1}};          //   * *
 
-        public int[,] I_Shape_90 = new int[4, 2] {{ 1,0 },   // *  
-                                                       { 1,0 },  // *
-                                                       { 1,0 },  // *
-                                                       { 1,0 }}; // *
+        public int[,] Z_Shape_90 = new int[3, 2] {{0,1},                //   *
+                                                      {1,1},            // * *
+                                                      {1,0}};           // *
 
-        //---- O Shape------------
-        public int[,] O_Shape = new int[2, 2] { { 1, 1 },  // * *
-                                                    { 1, 1 }}; // * *
+        //---- S Shape------------                                      // FORMA FÍSICA
+
+        public int[,] S_Shape_0 = new int[2, 3] {{0,1,1},               //   * *
+                                                     {1,1,0}};          // * *
+
+        public int[,] S_Shape_90 = new int[3, 2] {{1,0},                // *
+                                                      {1,1},            // * *
+                                                      {0,1}};           //   *
+
+        //---- I Shape------------                                      // FORMA FÍSICA
+
+        public int[,] I_Shape_0 = new int[2, 4] { { 1, 1, 1, 1 },       // * * * *
+            { 0, 0, 0, 0 } };                                           
+
+        public int[,] I_Shape_90 = new int[4, 2] {{ 1,0 },              // *  
+                                                       { 1,0 },         // *
+                                                       { 1,0 },         // *
+                                                       { 1,0 }};        // *
+
+        //---- O Shape------------                                      // FORMA FÍSICA
+
+        public int[,] O_Shape = new int[2, 2] { { 1, 1 },               // * *
+                                                    { 1, 1 }};          // * *
 
     }
 }
