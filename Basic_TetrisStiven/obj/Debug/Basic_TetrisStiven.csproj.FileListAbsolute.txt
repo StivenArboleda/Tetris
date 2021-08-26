@@ -1,0 +1,15 @@
+C:\Users\Windows 10\source\repos\Basic_TetrisStiven\Basic_TetrisStiven\bin\Debug\Basic_TetrisStiven.exe.config
+C:\Users\Windows 10\source\repos\Basic_TetrisStiven\Basic_TetrisStiven\bin\Debug\Basic_TetrisStiven.exe
+C:\Users\Windows 10\source\repos\Basic_TetrisStiven\Basic_TetrisStiven\bin\Debug\Basic_TetrisStiven.pdb
+C:\Users\Windows 10\source\repos\Basic_TetrisStiven\Basic_TetrisStiven\obj\Debug\Basic_TetrisStiven.csprojAssemblyReference.cache
+C:\Users\Windows 10\source\repos\Basic_TetrisStiven\Basic_TetrisStiven\obj\Debug\MainWindow.g.cs
+C:\Users\Windows 10\source\repos\Basic_TetrisStiven\Basic_TetrisStiven\obj\Debug\App.g.cs
+C:\Users\Windows 10\source\repos\Basic_TetrisStiven\Basic_TetrisStiven\obj\Debug\Basic_TetrisStiven_MarkupCompile.cache
+C:\Users\Windows 10\source\repos\Basic_TetrisStiven\Basic_TetrisStiven\obj\Debug\Basic_TetrisStiven_MarkupCompile.lref
+C:\Users\Windows 10\source\repos\Basic_TetrisStiven\Basic_TetrisStiven\obj\Debug\MainWindow.baml
+C:\Users\Windows 10\source\repos\Basic_TetrisStiven\Basic_TetrisStiven\obj\Debug\Basic_TetrisStiven.g.resources
+C:\Users\Windows 10\source\repos\Basic_TetrisStiven\Basic_TetrisStiven\obj\Debug\Basic_TetrisStiven.Properties.Resources.resources
+C:\Users\Windows 10\source\repos\Basic_TetrisStiven\Basic_TetrisStiven\obj\Debug\Basic_TetrisStiven.csproj.GenerateResource.cache
+C:\Users\Windows 10\source\repos\Basic_TetrisStiven\Basic_TetrisStiven\obj\Debug\Basic_TetrisStiven.csproj.CoreCompileInputs.cache
+C:\Users\Windows 10\source\repos\Basic_TetrisStiven\Basic_TetrisStiven\obj\Debug\Basic_TetrisStiven.exe
+C:\Users\Windows 10\source\repos\Basic_TetrisStiven\Basic_TetrisStiven\obj\Debug\Basic_TetrisStiven.pdb
