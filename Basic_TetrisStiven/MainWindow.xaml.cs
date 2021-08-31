@@ -51,6 +51,9 @@ namespace Basic_TetrisStiven
         private int gameLevel = 1;
         private int gameScore = 0;
 
+        List<int> currentRow = null;
+        List<int> currentColumn = null;
+
         //COLORES FIJOS DE CADA FIGURA
         private static Color O_ShapeColor = Colors.Green;
         private static Color I_ShapeColor = Colors.Red;
@@ -71,7 +74,8 @@ namespace Basic_TetrisStiven
         {
             InitializeComponent();
             gameSpeed = GAMESPEED;
-           
+
+            KeyDown += Key_Down;
             // Inicialización del contador
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, gameSpeed); // 600 millisegundos
@@ -191,6 +195,185 @@ namespace Basic_TetrisStiven
 
         public int[,] O_Shape = new int[2, 2] { { 1, 1 },               // * *
                                                     { 1, 1 }};          // * *
+
+
+        //----------------------------------------------------
+        //MOVER LA FIGURA EN LAS 4 DIRECCIONES DE LAS FLECHAS
+        //----------------------------------------------------
+        private void Key_Down(object sender, KeyEventArgs e)
+        {
+
+            if (!timer.IsEnabled) { return; }
+            switch (e.Key.ToString())
+            {
+                case "Up":
+                    rotation += 90;
+                    if (rotation > 270) { rotation = 0; }
+                    shapeRotation(rotation);
+                    break;
+                case "Down":
+                    downPos++;
+                    break;
+                case "Right":
+                    shapeLimit(); // REVISA SI CHOCA
+                    if (!rightCollided) { leftPos++; }
+                    rightCollided = false;
+                    break;
+                case "Left":
+                    shapeLimit();// REVISA SI CHOCA
+                    if (!leftCollided) { leftPos--; }
+                    leftCollided = false;
+                    break;
+            }
+            moveShape();
+        }
+
+        //----------------------------------------------------
+        //ROTAR LAS FICHAS DE ACUERDO A SU POSIBILIDAD
+        //----------------------------------------------------
+        private void shapeRotation(int _rotation)
+        {
+            // Check if collided
+            if (rotationCollided(rotation))
+            {
+                rotation -= 90;
+                return;
+            }
+
+            if (arrayShapes[currentShapeNumber].IndexOf("I_") == 0)
+            {
+                if (_rotation > 90) { _rotation = rotation = 0; }
+                currentTetromino = getVariableByString("I_Tetromino_" + _rotation);
+            }
+            else if (arrayShapes[currentShapeNumber].IndexOf("T_") == 0)
+            {
+                currentTetromino = getVariableByString("T_Tetromino_" + _rotation);
+            }
+            else if (arrayShapes[currentShapeNumber].IndexOf("S_") == 0)
+            {
+                if (_rotation > 90) { _rotation = rotation = 0; }
+                currentTetromino = getVariableByString("S_Tetromino_" + _rotation);
+            }
+            else if (arrayShapes[currentShapeNumber].IndexOf("Z_") == 0)
+            {
+                if (_rotation > 90) { _rotation = rotation = 0; }
+                currentTetromino = getVariableByString("Z_Tetromino_" + _rotation);
+            }
+            else if (arrayShapes[currentShapeNumber].IndexOf("J_") == 0)
+            {
+                currentTetromino = getVariableByString("J_Tetromino_" + _rotation);
+            }
+            else if (arrayShapes[currentShapeNumber].IndexOf("L_") == 0)
+            {
+                currentTetromino = getVariableByString("L_Tetromino_" + _rotation);
+            }
+            else if (arrayShapes[currentShapeNumber].IndexOf("O_") == 0) // Do not rotate this
+            {
+                return;
+            }
+
+            isRotated = true;
+            //addShape(currentShapeNumber, leftPos, downPos);
+        }
+        private void moveShape()
+        {
+            leftCollided = false;
+            rightCollided = false;
+
+            shapeLimit();  // VERIFICA SI LLEGÓ AL LIMITE
+            if (leftPos > (tetrisGridColumn - currentTetrominoWidth))
+            {
+                leftPos = (tetrisGridColumn - currentTetrominoWidth);
+            }
+            else if (leftPos < 0) { leftPos = 0; }
+
+            if (bottomCollided)
+            {
+               // shapeStoped(); PARAR FIGURA
+                return;
+            }
+            //ShapeAdd(currentShapeNumber, leftPos, downPos);
+        }
+
+        // Accede por el nombre.
+        private int[,] getVariableByString(string variable)
+        {
+            return (int[,])this.GetType().GetField(variable).GetValue(this);
+        }
+        private void shapeLimit()
+        {
+            bottomCollided = checkLimit(0, 1);
+            leftCollided = checkLimit(-1, 0);
+            rightCollided = checkLimit(1, 0);
+        }
+
+        private bool checkLimit(int _leftRightOffset, int _bottomOffset)
+        {
+            Rectangle movingSquare;
+            int squareRow = 0;
+            int squareColumn = 0;
+            for (int i = 0; i <= 3; i++)
+            {
+                squareRow = currentRow[i];
+                squareColumn = currentColumn[i];
+                try
+                {
+                    movingSquare = (Rectangle)Tetris.Children
+                    .Cast<UIElement>()
+                    .FirstOrDefault(e => Grid.GetRow(e) == squareRow + _bottomOffset && Grid.GetColumn(e) == squareColumn + _leftRightOffset);
+                    if (movingSquare != null)
+                    {
+                        if (movingSquare.Name.IndexOf("arrived") == 0)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                catch { }
+            }
+            if (downPos > (tetrisGridRow - currentTetrominoHeigth)) { return true; }
+            return false;
+        }
+
+        private bool rotationCollided(int _rotation)
+        {
+            if (checkLimit(0, currentTetrominoWidth - 1)) { return true; }//LLEGÓ AL FINAL 
+            else if (checkLimit(0, -(currentTetrominoWidth - 1))) { return true; }// TOCA ARRIBA = PERDER
+            else if (checkLimit(0, -1)) { return true; }// TOCA ARRIBA = PERDER
+            else if (checkLimit(-1, currentTetrominoWidth - 1)) { return true; }// TOCA IZQUIERDA
+            else if (checkLimit(1, currentTetrominoWidth - 1)) { return true; }// TOCA DERECHA
+            return false;
+        }
+
+        //
+        private void Start_game(object sender, RoutedEventArgs e)
+        {
+
+            if (isGameOver)
+            {
+                Tetris.Children.Clear();
+                NextShape.Children.Clear();
+                GameOver.Visibility = Visibility.Collapsed;
+                isGameOver = false;
+            }
+            if (!timer.IsEnabled)
+            {
+                if (!gameActive)
+                {
+                    Score_num.Text = "0"; leftPos = 3; //addShape(currentShapeNumber, leftPos); }
+                    Next.Visibility = Level.Visibility = Visibility.Visible;
+                    Level.Text = "Level: " + gameLevel.ToString();
+                    timer.Start();
+                    start.Content = "Stop Game";
+                    gameActive = true;
+                }
+                else
+                {
+                    timer.Stop();
+                    start.Content = "Start Game";
+                }
+            }
+        }
 
     }
 }

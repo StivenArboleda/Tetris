@@ -20,7 +20,7 @@
             </Grid.RowDefinitions>
 
         </Grid>
-        <Button x:Name="start" Content="EMPEZAR" HorizontalAlignment="Left" Margin="84,569,0,0" VerticalAlignment="Top" Width="158" Height="96" FontFamily="Broadway" FontSize="26" Background="{x:Null}" BorderBrush="Black" VerticalContentAlignment="Center" IsManipulationEnabled="True" />
+        <Button x:Name="start" Content="EMPEZAR" HorizontalAlignment="Left" Margin="84,569,0,0" VerticalAlignment="Top" Width="158" Height="96" FontFamily="Broadway" FontSize="26" Background="{x:Null}" BorderBrush="Black" VerticalContentAlignment="Center" IsManipulationEnabled="True" Click="Start_game" />
         <Rectangle x:Name="back" Fill="Blue" HorizontalAlignment="Left" Height="614" Margin="429,51,0,0" Stroke="Black" VerticalAlignment="Top" Width="361"/>
         <Canvas x:Name="NextShape" HorizontalAlignment="Left" Height="191" VerticalAlignment="Top" Width="190" Margin="25,197,0,0"/>
         <Label x:Name="Next" Content="PROXIMO" HorizontalAlignment="Left" Margin="25,147,0,0" VerticalAlignment="Top" Width="158" FontFamily="Showcard Gothic" FontWeight="Bold" FontSize="28"/>
