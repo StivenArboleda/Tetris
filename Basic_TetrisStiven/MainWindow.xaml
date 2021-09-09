@@ -31,26 +31,25 @@
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition Height="0*"/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="39*"/>
             </Grid.RowDefinitions>
 
         </Grid>
-        <Button x:Name="start" Content="EMPEZAR" HorizontalAlignment="Left" Margin="25,555,0,0" VerticalAlignment="Top" Width="287" Height="96" FontFamily="Broadway" FontSize="26" Background="{x:Null}" BorderBrush="Black" VerticalContentAlignment="Center" IsManipulationEnabled="True" Click="Start_game" Grid.ColumnSpan="2" />
+        <Button x:Name="start" Content="EMPEZAR" HorizontalAlignment="Left" Margin="25,555,0,0" VerticalAlignment="Top" Width="173" Height="96" FontFamily="Broadway" FontSize="26" Background="{x:Null}" BorderBrush="Black" VerticalContentAlignment="Center" IsManipulationEnabled="True" Click="Start_game" />
         <Rectangle x:Name="back" Fill="Blue" HorizontalAlignment="Left" Height="612" Margin="409,53,0,0" Stroke="Black" VerticalAlignment="Top" Width="397" Grid.ColumnSpan="2"/>
         <Canvas x:Name="NextShape" HorizontalAlignment="Left" Height="191" VerticalAlignment="Top" Width="190" Margin="25,197,0,0" Grid.ColumnSpan="2"/>
         <Label x:Name="Next" Content="PROXIMO" HorizontalAlignment="Left" Margin="25,147,0,0" VerticalAlignment="Top" Width="158" FontFamily="Showcard Gothic" FontWeight="Bold" FontSize="28" Height="45" Grid.ColumnSpan="2"/>
@@ -61,5 +60,6 @@
         <TextBlock x:Name="Score" HorizontalAlignment="Left" Margin="107,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="39" Width="177" Background="Black" FontSize="32" OpacityMask="#FF0C0493" FontFamily="Showcard Gothic" FontWeight="Bold" Foreground="#FF0C0493" UseLayoutRounding="False" Grid.ColumnSpan="2"><Run Text="   "/><Run Text="PUNTAJE"/></TextBlock>
         <TextBlock x:Name="Score_num" HorizontalAlignment="Left" Margin="107,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="39" Width="177" Background="Black" FontSize="32" OpacityMask="#FF0C0493" FontFamily="Showcard Gothic" FontWeight="Bold" Foreground="#FF0C0493" UseLayoutRounding="False" Grid.ColumnSpan="2"><Run Text="            "/><Run Text="0"/></TextBlock>
         <TextBlock x:Name="Level" HorizontalAlignment="Left" Margin="232.8,147.2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="39" Width="177" FontSize="32" OpacityMask="#FF0C0493" FontFamily="Showcard Gothic" FontWeight="Bold" UseLayoutRounding="False" Grid.ColumnSpan="2"><Run Text="   "/><Run Text="NIVEL"/></TextBlock>
+        <Button x:Name="mode" Content=" MODO &#xA;COLOR" HorizontalAlignment="Left" Margin="216,555,0,0" VerticalAlignment="Top" Width="188" Height="96" FontFamily="Broadway" FontSize="26" Background="{x:Null}" BorderBrush="Black" VerticalContentAlignment="Center" IsManipulationEnabled="True" Click="mode_Click" />
     </Grid>
 </Window>

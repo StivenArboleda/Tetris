@@ -46,6 +46,7 @@ namespace Basic_TetrisStiven
         private bool leftCollided = false;
         private bool rightCollided = false;
         private bool isGameOver = false;
+        private bool modeColor = false;
         private int gameSpeed;
         private double gameSpeedCounter = 0;
         private int gameLevel = 1;
@@ -530,12 +531,26 @@ namespace Basic_TetrisStiven
         private Rectangle getBasicSquare(Color rectColor)
         {
             Rectangle rectangle = new Rectangle();
-            rectangle.Width = 35;
-            rectangle.Height = 35;
-            rectangle.StrokeThickness = 1;
-            rectangle.Stroke = Brushes.White;
-            rectangle.Fill = getGradientColor(rectColor); //DAR COLOR A LAS FICHAS
-            return rectangle;
+            
+            if (modeColor)
+            {
+                    rectangle.Width = 35;
+                    rectangle.Height = 35;
+                    rectangle.StrokeThickness = 1;
+                    rectangle.Stroke = Brushes.White;
+                    rectangle.Fill = getGradientColor(rectColor); //DAR COLOR A LAS FICHAS
+                    mode.Content = "MODO LÍNEA";
+                    return rectangle;
+            }
+            else 
+            {
+                rectangle.Width = 35;
+                rectangle.Height = 35;
+                rectangle.StrokeThickness = 3;
+                rectangle.Stroke = Brushes.Blue;               
+                mode.Content = "MODO COLOR";
+                return rectangle;
+            }
         }
         private LinearGradientBrush getGradientColor(Color clr)
         {
@@ -654,5 +669,17 @@ namespace Basic_TetrisStiven
             gameScore += 60 * gameLevel;
             return gameScore;
         }
+
+        private void mode_Click(object sender, RoutedEventArgs e)
+        {
+            if (modeColor) {
+                modeColor = false;
+            }
+            else
+            {
+                modeColor = true;
+            }
+        }
+
     }
 }
