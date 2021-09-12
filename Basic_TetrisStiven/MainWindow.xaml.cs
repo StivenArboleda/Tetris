@@ -24,6 +24,7 @@ namespace Basic_TetrisStiven
 
         private const int GAMESPEED = 600;// milisegundos de la velocidad de la figura
         private int levelScale = 60;// cada 60 segundos el nivel inccrementa
+        List<System.Media.SoundPlayer> soundList = new List<System.Media.SoundPlayer>(); //sonidos
 
         DispatcherTimer timer;
         Random shapeRandom;
@@ -174,12 +175,16 @@ namespace Basic_TetrisStiven
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, gameSpeed); // 600 millisegundos
             timer.Tick += Timer_Tick; //TIEMPO DE CAÍDA
+
             tetrisGridColumn = Tetris.ColumnDefinitions.Count;
             tetrisGridRow = Tetris.RowDefinitions.Count;
             shapeRandom = new Random();
             currentShapeNumber = shapeRandom.Next(1, 8);
             nextShapeNumber = shapeRandom.Next(1, 8);
             Next.Visibility = Level.Visibility = GameOver.Visibility = Visibility.Collapsed;
+
+            //soundList.Add(new System.Media.SoundPlayer(Properties.Resources.collided));
+            //soundList.Add(new System.Media.SoundPlayer(Properties.Resources.deleteLine));
         }
 
         //CONTROLA EL TIEMPO PARA PODER MOVER LA FIGURA
@@ -382,6 +387,7 @@ namespace Basic_TetrisStiven
                 // If squareCount == gridColumn this means tha the line is completed and must to be delete
                 if (squareCount == gridColumn)
                 {
+                    playSound(1);
                     deleteLine(row);
                     Score.Text = getScore().ToString();
                     checkComplete();
@@ -585,7 +591,9 @@ namespace Basic_TetrisStiven
         }
         private void shapeStoped()
         {
+
             timer.Stop();
+            playSound(0);
             if (downPos <= 2)  // CONDICION PARA PERDER
             {
                 gameOver();
@@ -679,6 +687,10 @@ namespace Basic_TetrisStiven
             {
                 modeColor = true;
             }
+        }
+        private void playSound(int index)
+        {
+            soundList[index].Play();
         }
 
     }
